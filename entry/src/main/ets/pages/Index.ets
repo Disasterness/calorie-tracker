@@ -2,15 +2,17 @@ import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 import { HomePage } from './HomePage';
 import { SetMacroPage } from './SetMacroPage';
+import { HistoryPage } from './HistoryPage';
 
 
 @Entry
 @Component
 struct Index {
-  trackerService: TrackerService = TrackerService.instance();
+  @State trackerService: TrackerService = TrackerService.instance();
   context: UIContext = this.getUIContext();
 
-  aboutToAppear(): void {
+  async aboutToAppear(): Promise<void> {
+    await this.trackerService.init(this.context.getApplicationContext());
     this.trackerService.setHeader(this.context);
     NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
   }
@@ -22,6 +24,8 @@ struct Index {
         HomePage();
       } else if (name === 'SetMacroPage') {
         SetMacroPage()
+      } else if (name === 'HistoryPage') {
+        HistoryPage()
       }
     }.hideTitleBar(true)
   }

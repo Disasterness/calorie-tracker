@@ -1,4 +1,4 @@
-import { ArcList, ArcListItem, ArcListAttribute, ArcListItemAttribute, ComponentContent } from '@kit.ArkUI';
+import { ArcList, ArcListItem } from '@kit.ArkUI';
 import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 
@@ -9,10 +9,11 @@ export struct SetMacroPage {
   @State gaugeValue: number = 0;
   @State gaugeTargetValue: number = 0;
   @State showWarningText: boolean = false;
+  @State isSettingTarget: boolean = false;
 
   aboutToAppear(): void {
-
-    if (NavigationService.getInstance().arg === 'Calorie') {
+    const arg = NavigationService.getInstance().arg;
+    if (arg === 'Calorie') {
       this.gaugeValue = this.getRelatedValue() / 100;
       this.gaugeTargetValue = this.getRelatedTargetValue() / 100;
     } else {
@@ -26,7 +27,8 @@ export struct SetMacroPage {
   }
 
   getRelatedValue(): number {
-    switch (NavigationService.getInstance().arg) {
+    const arg = NavigationService.getInstance().arg;
+    switch (arg) {
       case 'Calorie':
         return TrackerService.instance().currentMacroModel.kcal;
       case 'Protein':
@@ -41,7 +43,8 @@ export struct SetMacroPage {
   }
 
   getRelatedTargetValue(): number {
-    switch (NavigationService.getInstance().arg) {
+    const arg = NavigationService.getInstance().arg;
+    switch (arg) {
       case 'Calorie':
         return TrackerService.instance().targetMacroModel.kcal;
       case 'Protein':
@@ -56,7 +59,8 @@ export struct SetMacroPage {
   }
 
   setParameters() {
-    switch (NavigationService.getInstance().arg) {
+    const arg = NavigationService.getInstance().arg;
+    switch (arg) {
       case 'Calorie':
         TrackerService.instance().currentMacroModel.kcal = this.getProperValue(this.gaugeValue);
         TrackerService.instance().targetMacroModel.kcal = this.getProperValue(this.gaugeTargetValue);
@@ -74,74 +78,95 @@ export struct SetMacroPage {
         TrackerService.instance().targetMacroModel.carbs = this.getProperValue(this.gaugeTargetValue);
         break;
       default:
-        console.info('Error');
         break;
     }
   }
 
   getProperValue(value: number): number {
-    if (NavigationService.getInstance().arg === 'Calorie') {
+    const arg = NavigationService.getInstance().arg;
+    if (arg === 'Calorie') {
       return (value * 100);
     } else {
       return (value * 10);
     }
   }
 
+  quickAdd(amount: number) {
+    const arg = NavigationService.getInstance().arg;
+    if (arg === 'Calorie') {
+      this.gaugeValue += amount / 100;
+    } else {
+      this.gaugeValue += amount / 10;
+    }
+  }
+
   build() {
     Gauge({ value: this.gaugeValue, min: 0, max: this.gaugeTargetValue }) {
-      ArcList({ initialIndex: 2 }) {
+      ArcList({ initialIndex: 0 }) {
         ArcListItem() {
-          Text(this.getProperValue(this.gaugeValue).toString())
-            .fontSize($r(`app.float.menu_item_font_size`))
-            .fontColor(Color.White)
-            .textAlign(TextAlign.End)
-            .fontWeight(FontWeight.Bold)
-            .textShadow({
-              radius: 0.01, // very thin
-              color: Color.Black,
-              offsetX: 0,
-              offsetY: 0
-            })
-            .lineHeight(18);
-        };
+           Text(NavigationService.getInstance().arg)
+             .fontSize(20)
+             .fontColor(Color.White)
+             .fontWeight(FontWeight.Bold)
+             .margin({ bottom: 10 })
+        }
 
         ArcListItem() {
-          Slider({ style: SliderStyle.InSet, value: this.gaugeValue })
+          Row() {
+             Text(this.isSettingTarget ? "Target: " : "Current: ")
+                .fontColor(Color.White)
+             Text(this.getProperValue(this.isSettingTarget ? this.gaugeTargetValue : this.gaugeValue).toString())
+                .fontSize(24)
+                .fontColor(Color.White)
+                .fontWeight(FontWeight.Bold)
+          }
+        }
+
+        if (!this.isSettingTarget) {
+          ArcListItem() {
+            Row() {
+              Button("+1")
+                .onClick(() => this.quickAdd(1))
+                .margin(2)
+              Button("+5")
+                .onClick(() => this.quickAdd(5))
+                .margin(2)
+              if (NavigationService.getInstance().arg === 'Calorie') {
+                Button("+50")
+                  .onClick(() => this.quickAdd(50))
+                  .margin(2)
+                Button("+100")
+                  .onClick(() => this.quickAdd(100))
+                  .margin(2)
+              }
+            }
+          }
+        }
+
+        ArcListItem() {
+          Slider({ style: SliderStyle.InSet, value: this.isSettingTarget ? this.gaugeTargetValue : this.gaugeValue })
             .showSteps(true)
             .selectedColor($r('app.color.gauge'))
             .onChange((value: number) => {
-              this.gaugeValue = value;
+              if (this.isSettingTarget) {
+                this.gaugeTargetValue = value;
+              } else {
+                this.gaugeValue = value;
+              }
             }).margin({ bottom: 10, right: 30, left: 30 });
         };
 
         ArcListItem() {
-          Text(this.getProperValue(this.gaugeTargetValue).toString())
-            .fontSize($r(`app.float.menu_item_font_size`))
-            .fontColor(Color.White)
-            .textAlign(TextAlign.End)
-            .fontWeight(FontWeight.Bold)
-            .textShadow({
-              radius: 0.01, // very thin
-              color: Color.Black,
-              offsetX: 0,
-              offsetY: 0
-            })
-            .lineHeight(18);
-        };
-
-        ArcListItem() {
-          Slider({ style: SliderStyle.InSet, value: this.gaugeTargetValue })
-            .showSteps(true)
-            .selectedColor($r('app.color.gauge'))
-            .onChange((value: number) => {
-              this.gaugeTargetValue = value;
-            }).margin({ bottom: 10, right: 30, left: 30 });
+           Button(this.isSettingTarget ? "Switch to Intake" : "Switch to Target")
+             .onClick(() => { this.isSettingTarget = !this.isSettingTarget })
+             .backgroundColor(Color.Transparent)
+             .border({ width: 1, color: Color.White })
         }
 
         ArcListItem() {
           Column() {
             Row() {
-              Text('Set')
+              Text('Save')
                 .fontSize(18)
                 .fontColor(Color.White)
                 .textAlign(TextAlign.End)
@@ -150,35 +175,21 @@ export struct SetMacroPage {
             }
             .linearGradient({
               direction: GradientDirection.Right,
-              colors: [[Color.Grey, 0.0],
-                [Color.Grey, 1]]
+              colors: [[$r('app.color.gradient_target_button_start'), 0.0],
+                [$r('app.color.gradient_target_button_end'), 1]]
             })
             .borderRadius(6)
             .alignItems(VerticalAlign.Center)
             .justifyContent(FlexAlign.Center)
             .width('70%')
             .height('65px')
-            .onClick(() => {
-              if (this.isButtonActive()) {
-                this.setParameters();
-                TrackerService.instance().setHeader(this.getUIContext());
-                NavigationService.getInstance().pageInfos.clear();
-                NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
-              } else {
-                this.showWarningText = true;
-              }
-
+            .onClick(async () => {
+              this.setParameters();
+              await TrackerService.instance().syncToPersistence();
+              TrackerService.instance().setHeader(this.getUIContext());
+              NavigationService.getInstance().pageInfos.clear();
+              NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
             })
-
-            if (this.showWarningText) {
-              Text($r('app.string.warning'))
-                .fontSize('10fp')
-                .fontColor('#FFFF8A8A')
-                .textAlign(TextAlign.Center)
-                .fontWeight(FontWeight.Bold)
-                .margin({ top: 6 })
-                .width('50%')
-            }
           }
         }
       }
