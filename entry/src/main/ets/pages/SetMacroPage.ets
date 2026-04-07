@@ -128,17 +128,33 @@ export struct SetMacroPage {
             Row() {
               Button("+1")
                 .onClick(() => this.quickAdd(1))
-                .margin(2)
+                .margin(1)
+                .fontSize(12)
+                .width(40)
+                .height(25)
+                .backgroundColor($r('app.color.gauge'))
               Button("+5")
                 .onClick(() => this.quickAdd(5))
-                .margin(2)
+                .margin(1)
+                .fontSize(12)
+                .width(40)
+                .height(25)
+                .backgroundColor($r('app.color.gauge'))
               if (NavigationService.getInstance().arg === 'Calorie') {
                 Button("+50")
                   .onClick(() => this.quickAdd(50))
-                  .margin(2)
+                  .margin(1)
+                  .fontSize(12)
+                  .width(40)
+                  .height(25)
+                  .backgroundColor($r('app.color.gauge'))
                 Button("+100")
                   .onClick(() => this.quickAdd(100))
-                  .margin(2)
+                  .margin(1)
+                  .fontSize(12)
+                  .width(45)
+                  .height(25)
+                  .backgroundColor($r('app.color.gauge'))
               }
             }
             .justifyContent(FlexAlign.Center)
@@ -163,7 +179,10 @@ export struct SetMacroPage {
            Button(this.isSettingTarget ? "Switch to Intake" : "Switch to Target")
              .onClick(() => { this.isSettingTarget = !this.isSettingTarget })
              .backgroundColor(Color.Transparent)
-             .border({ width: 1, color: Color.White })
+             .border({ width: 1, color: $r('app.color.gauge') })
+             .fontColor($r('app.color.gauge'))
+             .fontSize(12)
+             .height(30)
              .alignSelf(ItemAlign.Center)
         }
 
@@ -177,16 +196,12 @@ export struct SetMacroPage {
                 .lineHeight(18)
                 .fontWeight(FontWeight.Bold)
             }
-            .linearGradient({
-              direction: GradientDirection.Right,
-              colors: [[$r('app.color.gradient_target_button_start'), 0.0],
-                [$r('app.color.gradient_target_button_end'), 1]]
-            })
+            .backgroundColor($r('app.color.gauge'))
             .borderRadius(6)
             .alignItems(VerticalAlign.Center)
             .justifyContent(FlexAlign.Center)
             .width('70%')
-            .height('65px')
+            .height('50px')
             .onClick(async () => {
               this.setParameters();
               await TrackerService.instance().syncToPersistence();
@@ -196,6 +211,7 @@ export struct SetMacroPage {
           }
           .alignItems(HorizontalAlign.Center)
           .width('100%')
+          .margin({ top: 10 })
         }
       }
       .alignListItem(ListItemAlign.Center)
