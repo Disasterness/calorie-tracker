@@ -4,7 +4,7 @@ import { HistoryRecord } from '../core/models/HistoryRecord';
 
 @Entry
 @Component
-export struct HistoryPage {
+struct HistoryPage {
   @State trackerService: TrackerService = TrackerService.instance();
 
   build() {

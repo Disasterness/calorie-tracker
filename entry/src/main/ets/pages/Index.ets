@@ -12,9 +12,11 @@ struct Index {
   context: UIContext = this.getUIContext();
 
   aboutToAppear(): void {
-    this.trackerService.init(this.context).then(() => {
+    this.trackerService.init(this.getUIContext().getHostContext() as any).then(() => {
       this.trackerService.setHeader(this.context);
       NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
+    }).catch((e: Error) => {
+      console.error('Failed to initialize Index: ' + e.message);
     });
   }
 

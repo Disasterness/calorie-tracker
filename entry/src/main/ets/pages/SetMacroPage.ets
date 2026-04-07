@@ -4,7 +4,7 @@ import { TrackerService } from '../core/services/TrackerService';
 
 @Entry
 @Component
-export struct SetMacroPage {
+struct SetMacroPage {
   context: UIContext = this.getUIContext()
   @State gaugeValue: number = 0;
   @State gaugeTargetValue: number = 0;
