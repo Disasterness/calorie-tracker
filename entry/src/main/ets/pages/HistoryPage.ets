@@ -1,4 +1,3 @@
-import { List, ListItem } from '@kit.ArkUI';
 import { TrackerService } from '../core/services/TrackerService';
 import { HistoryRecord } from '../core/models/HistoryRecord';
 

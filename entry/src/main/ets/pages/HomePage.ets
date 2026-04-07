@@ -1,4 +1,4 @@
-import { List, ListItem, ComponentContent } from '@kit.ArkUI';
+import { ComponentContent } from '@kit.ArkUI';
 import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 import { MacroModel } from '../core/models/MacroModel';

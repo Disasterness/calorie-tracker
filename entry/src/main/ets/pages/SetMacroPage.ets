@@ -1,4 +1,3 @@
-import { List, ListItem } from '@kit.ArkUI';
 import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 
