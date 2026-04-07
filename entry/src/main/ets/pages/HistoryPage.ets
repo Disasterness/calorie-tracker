@@ -16,7 +16,7 @@ export struct HistoryPage {
         .margin({ top: 20, bottom: 10 })
 
       ArcList() {
-        ForEach(this.trackerService.history, (item: HistoryRecord) => {
+        ForEach(this.trackerService.history, (item: HistoryRecord, index: number) => {
           ArcListItem() {
             Column() {
               Text(item.date)
@@ -47,7 +47,7 @@ export struct HistoryPage {
             .borderRadius(10)
             .margin({ bottom: 5 })
           }
-        })
+        }, (item: HistoryRecord) => item.date)
       }
       .height('100%')
       .width('100%')

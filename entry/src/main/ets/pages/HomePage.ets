@@ -10,28 +10,25 @@ export struct HomePage {
 
   @Builder
   singleMenuItem(color: ResourceColor, title: string, currentMacro: string, target: string) {
-    const remaining = Number(target) - Number(currentMacro);
-    const remainingText = remaining > 0 ? `${remaining} left` : "Goal reached";
-
     Column() {
       Row() {
         Text(title)
           .fontSize($r(`app.float.menu_item_font_size`))
-        .fontColor(Color.White)
-        .textAlign(TextAlign.End)
-        .fontWeight(FontWeight.Bold)
-        .textShadow({
-          radius: 0.01,
-          color: Color.Black,
-          offsetX: 0,
-          offsetY: 0
-        })
-        .lineHeight(18);
-      Text(`${currentMacro} / ${target}`)
-        .fontSize($r(`app.float.menu_item_font_size`))
-        .fontColor(Color.White)
-        .textAlign(TextAlign.End)
-        .fontWeight(FontWeight.Bold)
+          .fontColor(Color.White)
+          .textAlign(TextAlign.End)
+          .fontWeight(FontWeight.Bold)
+          .textShadow({
+            radius: 0.01,
+            color: Color.Black,
+            offsetX: 0,
+            offsetY: 0
+          })
+          .lineHeight(18);
+        Text(`${currentMacro} / ${target}`)
+          .fontSize($r(`app.float.menu_item_font_size`))
+          .fontColor(Color.White)
+          .textAlign(TextAlign.End)
+          .fontWeight(FontWeight.Bold)
           .textShadow({
             radius: 0.01,
             color: Color.Black,
@@ -45,7 +42,7 @@ export struct HomePage {
       .width('100%')
 
       Row() {
-        Text(remainingText)
+        Text(Number(target) - Number(currentMacro) > 0 ? `${Number(target) - Number(currentMacro)} left` : "Goal reached")
           .fontSize(10)
           .fontColor(Color.White)
           .opacity(0.8)

@@ -2,7 +2,6 @@ import { MacroModel } from '../models/MacroModel';
 import { HistoryRecord } from '../models/HistoryRecord';
 import { ComponentContent } from '@kit.ArkUI';
 import { PersistenceService } from './PersistenceService';
-import { common } from '@kit.AbilityKit';
 
 @Builder
 function buildText() {
@@ -30,7 +29,7 @@ export class TrackerService {
     return TrackerService._instance;
   }
 
-  async init(context: common.Context) {
+  async init(context: Object) {
     await PersistenceService.getInstance().init(context);
     const savedCurrent = await PersistenceService.getInstance().loadCurrentMacros();
     if (savedCurrent) {

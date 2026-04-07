@@ -11,10 +11,11 @@ struct Index {
   @State trackerService: TrackerService = TrackerService.instance();
   context: UIContext = this.getUIContext();
 
-  async aboutToAppear(): Promise<void> {
-    await this.trackerService.init(this.context.getApplicationContext());
-    this.trackerService.setHeader(this.context);
-    NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
+  aboutToAppear(): void {
+    this.trackerService.init(this.context).then(() => {
+      this.trackerService.setHeader(this.context);
+      NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
+    });
   }
 
   @Builder

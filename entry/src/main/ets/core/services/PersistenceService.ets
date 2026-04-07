@@ -1,5 +1,4 @@
 import { preferences } from '@kit.ArkData';
-import { common } from '@kit.AbilityKit';
 import { MacroModel } from '../models/MacroModel';
 
 export class PersistenceService {
@@ -20,7 +19,7 @@ export class PersistenceService {
     return PersistenceService.instance;
   }
 
-  async init(context: common.Context) {
+  async init(context: any) {
     this.pref = await preferences.getPreferences(context, PersistenceService.PREF_NAME);
   }
 
