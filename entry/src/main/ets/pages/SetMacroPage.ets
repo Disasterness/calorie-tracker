@@ -103,10 +103,10 @@ export struct SetMacroPage {
       List({ initialIndex: 0 }) {
         ListItem() {
            Text(NavigationService.getInstance().arg)
-             .fontSize(20)
+             .fontSize(18)
              .fontColor(Color.White)
              .fontWeight(FontWeight.Bold)
-             .margin({ bottom: 10 })
+             .margin({ bottom: 8 })
              .alignSelf(ItemAlign.Center)
         }
 
@@ -114,8 +114,9 @@ export struct SetMacroPage {
           Row() {
              Text(this.isSettingTarget ? "Target: " : "Current: ")
                 .fontColor(Color.White)
+                .fontSize(14)
              Text(this.getProperValue(this.isSettingTarget ? this.gaugeTargetValue : this.gaugeValue).toString())
-                .fontSize(24)
+                .fontSize(22)
                 .fontColor(Color.White)
                 .fontWeight(FontWeight.Bold)
           }
@@ -128,35 +129,39 @@ export struct SetMacroPage {
             Button("+1")
               .onClick(() => this.quickAdd(1))
               .margin(1)
-              .fontSize(14)
+              .fontSize(10)
               .fontColor(Color.White)
-              .width(45)
-              .height(30)
+              .width(42)
+              .height(28)
+              .padding(0)
               .backgroundColor($r('app.color.gauge'))
             Button("+5")
               .onClick(() => this.quickAdd(5))
               .margin(1)
-              .fontSize(14)
+              .fontSize(10)
               .fontColor(Color.White)
-              .width(45)
-              .height(30)
+              .width(42)
+              .height(28)
+              .padding(0)
               .backgroundColor($r('app.color.gauge'))
             if (NavigationService.getInstance().arg === 'Calorie') {
               Button("+50")
                 .onClick(() => this.quickAdd(50))
                 .margin(1)
-                .fontSize(14)
+                .fontSize(10)
                 .fontColor(Color.White)
-                .width(45)
-                .height(30)
+                .width(42)
+                .height(28)
+                .padding(0)
                 .backgroundColor($r('app.color.gauge'))
               Button("+100")
                 .onClick(() => this.quickAdd(100))
                 .margin(1)
-                .fontSize(14)
+                .fontSize(10)
                 .fontColor(Color.White)
-                .width(55)
-                .height(30)
+                .width(48)
+                .height(28)
+                .padding(0)
                 .backgroundColor($r('app.color.gauge'))
             }
           }
@@ -174,7 +179,7 @@ export struct SetMacroPage {
               } else {
                 this.gaugeValue = value;
               }
-            }).margin({ bottom: 10, right: 30, left: 30 });
+            }).margin({ bottom: 8, right: 30, left: 30 });
         };
 
         ListItem() {
@@ -183,8 +188,8 @@ export struct SetMacroPage {
              .backgroundColor(Color.Transparent)
              .border({ width: 1, color: $r('app.color.gauge') })
              .fontColor($r('app.color.gauge'))
-             .fontSize(12)
-             .height(30)
+             .fontSize(11)
+             .height(26)
              .alignSelf(ItemAlign.Center)
         }
 
@@ -192,18 +197,18 @@ export struct SetMacroPage {
           Column() {
             Row() {
               Text('Save')
-                .fontSize(18)
+                .fontSize(16)
                 .fontColor(Color.White)
                 .textAlign(TextAlign.End)
-                .lineHeight(18)
+                .lineHeight(16)
                 .fontWeight(FontWeight.Bold)
             }
             .backgroundColor($r('app.color.gauge'))
             .borderRadius(6)
             .alignItems(VerticalAlign.Center)
             .justifyContent(FlexAlign.Center)
-            .width('70%')
-            .height('50px')
+            .width('60%')
+            .height('40px')
             .onClick(async () => {
               this.setParameters();
               await TrackerService.instance().syncToPersistence();
@@ -213,7 +218,7 @@ export struct SetMacroPage {
           }
           .alignItems(HorizontalAlign.Center)
           .width('100%')
-          .margin({ top: 10 })
+          .margin({ top: 8, bottom: 20 })
         }
       }
       .alignListItem(ListItemAlign.Center)
