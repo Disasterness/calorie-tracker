@@ -123,43 +123,45 @@ export struct SetMacroPage {
           .width('100%')
         }
 
-        if (!this.isSettingTarget) {
-          ListItem() {
-            Row() {
-              Button("+1")
-                .onClick(() => this.quickAdd(1))
+        ListItem() {
+          Row() {
+            Button("+1")
+              .onClick(() => this.quickAdd(1))
+              .margin(1)
+              .fontSize(14)
+              .fontColor(Color.White)
+              .width(45)
+              .height(30)
+              .backgroundColor($r('app.color.gauge'))
+            Button("+5")
+              .onClick(() => this.quickAdd(5))
+              .margin(1)
+              .fontSize(14)
+              .fontColor(Color.White)
+              .width(45)
+              .height(30)
+              .backgroundColor($r('app.color.gauge'))
+            if (NavigationService.getInstance().arg === 'Calorie') {
+              Button("+50")
+                .onClick(() => this.quickAdd(50))
                 .margin(1)
-                .fontSize(12)
-                .width(40)
-                .height(25)
+                .fontSize(14)
+                .fontColor(Color.White)
+                .width(45)
+                .height(30)
                 .backgroundColor($r('app.color.gauge'))
-              Button("+5")
-                .onClick(() => this.quickAdd(5))
+              Button("+100")
+                .onClick(() => this.quickAdd(100))
                 .margin(1)
-                .fontSize(12)
-                .width(40)
-                .height(25)
+                .fontSize(14)
+                .fontColor(Color.White)
+                .width(55)
+                .height(30)
                 .backgroundColor($r('app.color.gauge'))
-              if (NavigationService.getInstance().arg === 'Calorie') {
-                Button("+50")
-                  .onClick(() => this.quickAdd(50))
-                  .margin(1)
-                  .fontSize(12)
-                  .width(40)
-                  .height(25)
-                  .backgroundColor($r('app.color.gauge'))
-                Button("+100")
-                  .onClick(() => this.quickAdd(100))
-                  .margin(1)
-                  .fontSize(12)
-                  .width(45)
-                  .height(25)
-                  .backgroundColor($r('app.color.gauge'))
-              }
             }
-            .justifyContent(FlexAlign.Center)
-            .width('100%')
           }
+          .justifyContent(FlexAlign.Center)
+          .width('100%')
         }
 
         ListItem() {
