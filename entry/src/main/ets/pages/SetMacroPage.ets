@@ -99,7 +99,17 @@ export struct SetMacroPage {
   }
 
   build() {
-    Gauge({ value: this.gaugeValue, min: 0, max: this.gaugeTargetValue }) {
+    Stack() {
+      Gauge({ value: this.gaugeValue, min: 0, max: this.gaugeTargetValue })
+        .colors($r('app.color.gauge'))
+        .width('100%')
+        .height('100%')
+        .indicator(null)
+        .strokeWidth(18)
+        .trackShadow({ radius: 3, offsetX: 3, offsetY: 3 })
+        .value(this.gaugeValue)
+        .align(Alignment.Center)
+
       List({ initialIndex: 0 }) {
         ListItem() {
            Text(NavigationService.getInstance().arg)
@@ -222,14 +232,11 @@ export struct SetMacroPage {
         }
       }
       .alignListItem(ListItemAlign.Center)
+      .width('100%')
+      .height('100%')
     }
-    .colors($r('app.color.gauge'))
     .width('100%')
     .height('100%')
-    .indicator(null)
-    .strokeWidth(18)
-    .trackShadow({ radius: 3, offsetX: 3, offsetY: 3 })
-    .value(this.gaugeValue)
     .align(Alignment.Center)
     .linearGradient({
       direction: GradientDirection.Bottom,
