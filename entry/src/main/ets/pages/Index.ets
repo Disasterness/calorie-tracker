@@ -14,7 +14,6 @@ struct Index {
 
   aboutToAppear(): void {
     this.trackerService.init(this.getUIContext().getHostContext() as common.Context).then(() => {
-      this.trackerService.setHeader(this.context);
       NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
     }).catch((e: Error) => {
       console.error('Failed to initialize Index: ' + e.message);

@@ -9,53 +9,52 @@ export struct HomePage {
   @State trackerService: TrackerService = TrackerService.instance();
 
   build() {
-    List({ initialIndex: 0 }) {
-      ListItem() {
+    Scroll() {
+      Column() {
+        // Total Progress Display
+        Text(this.trackerService.calculateTotalProgress().toFixed(2) + `% of total target`)
+          .fontSize('14fp')
+          .fontWeight(FontWeight.Bold)
+          .fontColor(Color.White)
+          .margin({ top: 40, bottom: 20 })
+
         MacroItem({
           color: $r('app.color.kcal_menu_item_color'),
           title: 'Calorie',
           current: this.trackerService.currentMacroModel.kcal,
           target: this.trackerService.targetMacroModel.kcal
         })
-      };
 
-      ListItem() {
         MacroItem({
           color: $r('app.color.protein_menu_item_color'),
           title: 'Protein',
           current: this.trackerService.currentMacroModel.protein,
           target: this.trackerService.targetMacroModel.protein
         })
-      };
 
-      ListItem() {
         MacroItem({
           color: $r('app.color.fat_menu_item_color'),
           title: 'Fat',
           current: this.trackerService.currentMacroModel.fat,
           target: this.trackerService.targetMacroModel.fat
         })
-      };
 
-      ListItem() {
         MacroItem({
           color: $r('app.color.carb_menu_item_color'),
           title: 'Carbs',
           current: this.trackerService.currentMacroModel.carbs,
           target: this.trackerService.targetMacroModel.carbs
         })
-      }
 
-      ListItem() {
         Button('History')
           .onClick(() => {
             NavigationService.getInstance().pageInfos.pushPath({ name: 'HistoryPage' })
           })
           .backgroundColor(Color.Transparent)
           .border({ width: 1, color: Color.White })
-          .margin({ top: 10 })
-          .alignSelf(ItemAlign.Center)
+          .margin({ top: 10, bottom: 40 })
       }
+      .width('100%')
     }
     .height('100%')
     .width('100%')
@@ -64,7 +63,7 @@ export struct HomePage {
       colors: [[$r('app.color.base_background_gradient_start'), 0.0],
         [$r('app.color.base_background_gradient_end'), 1]]
     })
-    .alignListItem(ListItemAlign.Center)
+    .scrollBar(BarState.Off)
   }
 }
 

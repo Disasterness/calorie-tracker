@@ -190,7 +190,6 @@ export struct SetMacroPage {
             .onClick(async () => {
               this.setParameters();
               await TrackerService.instance().syncToPersistence();
-              TrackerService.instance().setHeader(this.getUIContext());
               NavigationService.getInstance().pageInfos.clear();
               NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
             })

@@ -4,24 +4,12 @@ import { ComponentContent } from '@kit.ArkUI';
 import { PersistenceService } from './PersistenceService';
 import { common } from '@kit.AbilityKit';
 
-@Builder
-function buildText() {
-  Column() {
-    Text(TrackerService.instance().calculateTotalProgress().toFixed(2) + `% of total target`)
-      .fontSize('14fp')
-      .fontWeight(FontWeight.Bold)
-  }
-  .margin({ top: 40 })
-  .justifyContent(FlexAlign.Center)
-}
-
 @Observed
 export class TrackerService {
   currentMacroModel: MacroModel = new MacroModel();
   targetMacroModel: MacroModel = new MacroModel(2000, 150, 150, 50);
   history: HistoryRecord[] = [];
   static _instance: TrackerService;
-  header?: ComponentContent<Object>;
 
   static instance() {
     if (!TrackerService._instance) {
@@ -84,10 +72,6 @@ export class TrackerService {
     } catch (e) {
       console.error('Failed to sync to persistence');
     }
-  }
-
-  setHeader(context: UIContext) {
-    this.header = new ComponentContent(context, wrapBuilder(buildText));
   }
 
   calculateTotalProgress(): number {
