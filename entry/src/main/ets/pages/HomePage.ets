@@ -9,7 +9,7 @@ export struct HomePage {
   @State trackerService: TrackerService = TrackerService.instance();
 
   build() {
-    ArcList({ initialIndex: 0, header: this.trackerService.header }) {
+    ArcList({ initialIndex: 0 }) {
       ArcListItem() {
         MacroItem({
           color: $r('app.color.kcal_menu_item_color'),

@@ -1,5 +1,6 @@
 import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
+import { common } from '@kit.AbilityKit';
 import { HomePage } from './HomePage';
 import { SetMacroPage } from './SetMacroPage';
 import { HistoryPage } from './HistoryPage';
@@ -12,7 +13,7 @@ struct Index {
   context: UIContext = this.getUIContext();
 
   aboutToAppear(): void {
-    this.trackerService.init(this.getUIContext().getHostContext() as Object).then(() => {
+    this.trackerService.init(this.getUIContext().getHostContext() as common.Context).then(() => {
       this.trackerService.setHeader(this.context);
       NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
     }).catch((e: Error) => {

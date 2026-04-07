@@ -14,7 +14,7 @@ export struct HistoryPage {
         .fontWeight(FontWeight.Bold)
         .margin({ top: 20, bottom: 10 })
 
-      ArcList() {
+      ArcList({ initialIndex: 0 }) {
         ForEach(this.trackerService.history, (item: HistoryRecord, index: number) => {
           ArcListItem() {
             Column() {
