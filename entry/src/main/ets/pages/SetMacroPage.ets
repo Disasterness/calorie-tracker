@@ -1,4 +1,4 @@
-import { ArcList, ArcListItem } from '@kit.ArkUI';
+import { List, ListItem } from '@kit.ArkUI';
 import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 
@@ -101,16 +101,17 @@ export struct SetMacroPage {
 
   build() {
     Gauge({ value: this.gaugeValue, min: 0, max: this.gaugeTargetValue }) {
-      ArcList({ initialIndex: 0 }) {
-        ArcListItem() {
+      List({ initialIndex: 0 }) {
+        ListItem() {
            Text(NavigationService.getInstance().arg)
              .fontSize(20)
              .fontColor(Color.White)
              .fontWeight(FontWeight.Bold)
              .margin({ bottom: 10 })
+             .alignSelf(ItemAlign.Center)
         }
 
-        ArcListItem() {
+        ListItem() {
           Row() {
              Text(this.isSettingTarget ? "Target: " : "Current: ")
                 .fontColor(Color.White)
@@ -119,10 +120,12 @@ export struct SetMacroPage {
                 .fontColor(Color.White)
                 .fontWeight(FontWeight.Bold)
           }
+          .justifyContent(FlexAlign.Center)
+          .width('100%')
         }
 
         if (!this.isSettingTarget) {
-          ArcListItem() {
+          ListItem() {
             Row() {
               Button("+1")
                 .onClick(() => this.quickAdd(1))
@@ -139,10 +142,12 @@ export struct SetMacroPage {
                   .margin(2)
               }
             }
+            .justifyContent(FlexAlign.Center)
+            .width('100%')
           }
         }
 
-        ArcListItem() {
+        ListItem() {
           Slider({ style: SliderStyle.InSet, value: this.isSettingTarget ? this.gaugeTargetValue : this.gaugeValue })
             .showSteps(true)
             .selectedColor($r('app.color.gauge'))
@@ -155,14 +160,15 @@ export struct SetMacroPage {
             }).margin({ bottom: 10, right: 30, left: 30 });
         };
 
-        ArcListItem() {
+        ListItem() {
            Button(this.isSettingTarget ? "Switch to Intake" : "Switch to Target")
              .onClick(() => { this.isSettingTarget = !this.isSettingTarget })
              .backgroundColor(Color.Transparent)
              .border({ width: 1, color: Color.White })
+             .alignSelf(ItemAlign.Center)
         }
 
-        ArcListItem() {
+        ListItem() {
           Column() {
             Row() {
               Text('Save')
@@ -190,8 +196,11 @@ export struct SetMacroPage {
               NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
             })
           }
+          .alignItems(HorizontalAlign.Center)
+          .width('100%')
         }
       }
+      .alignListItem(ListItemAlign.Center)
     }
     .colors($r('app.color.gauge'))
     .width('100%')

@@ -1,4 +1,4 @@
-import { ArcList, ArcListItem } from '@kit.ArkUI';
+import { List, ListItem } from '@kit.ArkUI';
 import { TrackerService } from '../core/services/TrackerService';
 import { HistoryRecord } from '../core/models/HistoryRecord';
 
@@ -14,9 +14,9 @@ export struct HistoryPage {
         .fontWeight(FontWeight.Bold)
         .margin({ top: 20, bottom: 10 })
 
-      ArcList({ initialIndex: 0 }) {
+      List({ initialIndex: 0 }) {
         ForEach(this.trackerService.history, (item: HistoryRecord, index: number) => {
-          ArcListItem() {
+          ListItem() {
             Column() {
               Text(item.date)
                 .fontSize(16)
@@ -45,11 +45,13 @@ export struct HistoryPage {
             .backgroundColor('#33000000')
             .borderRadius(10)
             .margin({ bottom: 5 })
+            .alignSelf(ItemAlign.Center)
           }
         }, (item: HistoryRecord) => item.date)
       }
       .height('100%')
       .width('100%')
+      .alignListItem(ListItemAlign.Center)
     }
     .height('100%')
     .width('100%')

@@ -1,4 +1,4 @@
-import { ArcList, ArcListItem, ComponentContent } from '@kit.ArkUI';
+import { List, ListItem, ComponentContent } from '@kit.ArkUI';
 import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 import { MacroModel } from '../core/models/MacroModel';
@@ -9,8 +9,8 @@ export struct HomePage {
   @State trackerService: TrackerService = TrackerService.instance();
 
   build() {
-    ArcList({ initialIndex: 0 }) {
-      ArcListItem() {
+    List({ initialIndex: 0 }) {
+      ListItem() {
         MacroItem({
           color: $r('app.color.kcal_menu_item_color'),
           title: 'Calorie',
@@ -19,7 +19,7 @@ export struct HomePage {
         })
       };
 
-      ArcListItem() {
+      ListItem() {
         MacroItem({
           color: $r('app.color.protein_menu_item_color'),
           title: 'Protein',
@@ -28,7 +28,7 @@ export struct HomePage {
         })
       };
 
-      ArcListItem() {
+      ListItem() {
         MacroItem({
           color: $r('app.color.fat_menu_item_color'),
           title: 'Fat',
@@ -37,7 +37,7 @@ export struct HomePage {
         })
       };
 
-      ArcListItem() {
+      ListItem() {
         MacroItem({
           color: $r('app.color.carb_menu_item_color'),
           title: 'Carbs',
@@ -46,7 +46,7 @@ export struct HomePage {
         })
       }
 
-      ArcListItem() {
+      ListItem() {
         Button('History')
           .onClick(() => {
             NavigationService.getInstance().pageInfos.pushPath({ name: 'HistoryPage' })
@@ -54,6 +54,7 @@ export struct HomePage {
           .backgroundColor(Color.Transparent)
           .border({ width: 1, color: Color.White })
           .margin({ top: 10 })
+          .alignSelf(ItemAlign.Center)
       }
     }
     .height('100%')
@@ -63,6 +64,7 @@ export struct HomePage {
       colors: [[$r('app.color.base_background_gradient_start'), 0.0],
         [$r('app.color.base_background_gradient_end'), 1]]
     })
+    .alignListItem(ListItemAlign.Center)
   }
 }
 
