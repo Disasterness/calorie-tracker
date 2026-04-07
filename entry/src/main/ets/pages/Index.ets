@@ -12,7 +12,7 @@ struct Index {
   context: UIContext = this.getUIContext();
 
   aboutToAppear(): void {
-    this.trackerService.init(this.getUIContext().getHostContext() as any).then(() => {
+    this.trackerService.init(this.getUIContext().getHostContext() as Object).then(() => {
       this.trackerService.setHeader(this.context);
       NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
     }).catch((e: Error) => {

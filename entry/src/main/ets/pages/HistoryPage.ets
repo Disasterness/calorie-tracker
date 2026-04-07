@@ -2,9 +2,8 @@ import { ArcList, ArcListItem } from '@kit.ArkUI';
 import { TrackerService } from '../core/services/TrackerService';
 import { HistoryRecord } from '../core/models/HistoryRecord';
 
-@Entry
 @Component
-struct HistoryPage {
+export struct HistoryPage {
   @State trackerService: TrackerService = TrackerService.instance();
 
   build() {

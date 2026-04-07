@@ -2,9 +2,8 @@ import { ArcList, ArcListItem } from '@kit.ArkUI';
 import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 
-@Entry
 @Component
-struct SetMacroPage {
+export struct SetMacroPage {
   context: UIContext = this.getUIContext()
   @State gaugeValue: number = 0;
   @State gaugeTargetValue: number = 0;

@@ -4,9 +4,8 @@ import { TrackerService } from '../core/services/TrackerService';
 import { MacroModel } from '../core/models/MacroModel';
 
 
-@Entry
 @Component
-struct HomePage {
+export struct HomePage {
   @State trackerService: TrackerService = TrackerService.instance();
 
   build() {
