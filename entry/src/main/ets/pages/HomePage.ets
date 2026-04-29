@@ -3,7 +3,6 @@ import { NavigationService } from '../core/services/NavigationService';
 import { TrackerService } from '../core/services/TrackerService';
 import { MacroModel } from '../core/models/MacroModel';
 
-
 @Component
 export struct HomePage {
   @State trackerService: TrackerService = TrackerService.instance();
@@ -101,11 +100,9 @@ struct MacroItem {
             offsetY: 0
           })
           .lineHeight(18)
-
       }
       .justifyContent(FlexAlign.SpaceBetween)
       .width('100%')
-
       Row() {
         Text(this.target - this.current > 0 ? `${this.target - this.current} left` : "Goal reached")
           .fontSize(10)

@@ -3,7 +3,7 @@ import { HistoryRecord } from '../core/models/HistoryRecord';
 
 @Component
 export struct HistoryPage {
-  @State trackerService: TrackerService = TrackerService.instance();
+  trackerService: TrackerService = TrackerService.instance();
 
   build() {
     Column() {
@@ -14,7 +14,7 @@ export struct HistoryPage {
         .margin({ top: 20, bottom: 10 })
 
       List({ initialIndex: 0 }) {
-        ForEach(this.trackerService.history, (item: HistoryRecord, index: number) => {
+        ForEach(this.trackerService.history, (item: HistoryRecord) => {
           ListItem() {
             Column() {
               Text(item.date)

@@ -5,7 +5,6 @@ import { HomePage } from './HomePage';
 import { SetMacroPage } from './SetMacroPage';
 import { HistoryPage } from './HistoryPage';
 
-
 @Entry
 @Component
 struct Index {
@@ -16,7 +15,7 @@ struct Index {
     this.trackerService.init(this.getUIContext().getHostContext() as common.Context).then(() => {
       NavigationService.getInstance().pageInfos.pushPath({ name: 'HomePage' });
     }).catch((e: Error) => {
-      console.error('Failed to initialize Index: ' + e.message);
+      console.error(`Failed to initialize Index: ${e.message}`);
     });
   }
 
