@@ -8,7 +8,7 @@ import { HistoryPage } from './HistoryPage';
 @Entry
 @Component
 struct Index {
-  @State trackerService: TrackerService = TrackerService.instance();
+  trackerService: TrackerService = TrackerService.instance();
   context: UIContext = this.getUIContext();
 
   aboutToAppear(): void {
